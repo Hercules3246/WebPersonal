@@ -5,6 +5,7 @@ const app = express();
 const { API_VERSION } = require("./config");
 
 //Load routing
+const userRoutes = require("./routes/user");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -12,5 +13,6 @@ app.use(bodyParser.json());
 //configuracion Header HTTP
 
 //RRouter Basic
+app.use(`/api/${API_VERSION}`, userRoutes);
 
 module.exports = app;

@@ -7,7 +7,6 @@ import MenuItem from "antd/lib/menu/MenuItem";
 
 export default function MenuSidebar(props) {
   const { menuCollapsed } = props;
-  console.log(props);
   const { Sider } = Layout;
   return (
     <Sider className="admin-siderbar" collapsed={menuCollapsed}>
