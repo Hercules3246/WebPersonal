@@ -15,7 +15,7 @@ export default function RegisterForm() {
     privacyPolicy: false
   });
 
-  const { formValid, setFormValid } = useState({
+  const [formValid, setFormValid] = useState({
     email: false,
     password: false,
     repeatPassword: false,
@@ -38,14 +38,20 @@ export default function RegisterForm() {
 
   const inputValidation = e => {
     const { type, name } = e.target;
-    if (type == "email") {
-      setFormValid({});
+    if (type === "email") {
+      setFormValid({ ...formValid, [name]: emailValidation(e.target) });
+    }
+    if (type === "password") {
+      setFormValid({ ...formValid, [name]: minLengthValidation(e.target, 6) });
+    }
+    if (type === "checkbox") {
+      setFormValid({ ...formValid, [name]: e.target.checked });
     }
   };
 
   const register = e => {
     e.preventDefault();
-    console.log(inputs);
+    console.log(formValid);
   };
   return (
     <Form className="register-form" onSubmit={register} onChange={changeForm}>
