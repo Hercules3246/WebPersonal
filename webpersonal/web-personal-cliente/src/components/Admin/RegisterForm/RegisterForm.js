@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Form, Icon, Input, Button, Checkbox, notificacion } from "antd";
+import { Form, Icon, Input, Button, Checkbox, notification } from "antd";
 import {
   emailValidation,
   minLengthValidation
 } from "../../../utils/formValidation";
+import { signUpApi } from "../../../api/user";
 
 import "./RegisterForm.scss";
 
@@ -52,6 +53,26 @@ export default function RegisterForm() {
   const register = e => {
     e.preventDefault();
     console.log(formValid);
+    const { email, password, repeatPassword, privacyPolicy } = formValid;
+
+    const emailVal = inputs.password;
+    const passwordVal = inputs.password;
+    const privacyPolicyVal = inputs.password;
+    const repeatPasswordVal = inputs.repeatPassword;
+
+    if (!emailVal || !passwordVal || !repeatPasswordVal || !privacyPolicyVal) {
+      notification["error"]({
+        message: "Todos los campos son obligatorios"
+      });
+    } else {
+      if (passwordVal != repeatPasswordVal) {
+        notification["error"]({
+          message: "Las contraseñas No coinciden."
+        });
+      } else {
+        const result = signUpApi(inputs);
+      }
+    }
   };
   return (
     <Form className="register-form" onSubmit={register} onChange={changeForm}>

@@ -1,7 +1,9 @@
 export function minLengthValidation(inputData, minLength) {
   const { value } = inputData;
+
   removeClassErrorSuccess(inputData);
-  if (value.lenght >= minLength) {
+
+  if (value.length >= minLength) {
     inputData.classList.add("success");
     return true;
   } else {
@@ -26,6 +28,5 @@ export function emailValidation(inputData) {
 }
 function removeClassErrorSuccess(inputData) {
   inputData.classList.remove("success");
-
   inputData.classList.remove("error");
 }
