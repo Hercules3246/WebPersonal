@@ -9,7 +9,20 @@ export function signUpApi(data) {
       "Content-Type": "application/json"
     }
   };
-  fetch(url, params).then(response => {
-    console.log(response);
-  });
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      if (result.user) {
+        return {
+          ok: true,
+          message: "Usuario Creado Correctamente"
+        };
+      }
+      return { ok: false, message: result.message };
+    })
+    .catch(err => {
+      return { ok: false, message: err.message };
+    });
 }

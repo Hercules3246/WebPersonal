@@ -50,9 +50,8 @@ export default function RegisterForm() {
     }
   };
 
-  const register = e => {
+  const register = async e => {
     e.preventDefault();
-    console.log(formValid);
     const { email, password, repeatPassword, privacyPolicy } = formValid;
 
     const emailVal = inputs.password;
@@ -70,9 +69,39 @@ export default function RegisterForm() {
           message: "Las contraseñas No coinciden."
         });
       } else {
-        const result = signUpApi(inputs);
+        const result = await signUpApi(inputs);
+        if (!result.ok) {
+          notification["error"]({
+            message: result.message
+          });
+        } else {
+          notification["success"]({
+            message: result.message
+          });
+          resetForm();
+        }
       }
     }
+  };
+  const resetForm = () => {
+    const inputs = document.getElementsByTagName("input");
+    for (let i = 0; i < inputs.length; i++) {
+      inputs[i].classList.remove("success");
+      inputs[i].classList.remove("error");
+    }
+    setInputs({
+      email: "",
+      password: "",
+      repeatPassword: "",
+      privacyPolicy: false
+    });
+
+    setFormValid({
+      email: false,
+      password: false,
+      repeatPassword: false,
+      privacyPolicy: false
+    });
   };
   return (
     <Form className="register-form" onSubmit={register} onChange={changeForm}>
