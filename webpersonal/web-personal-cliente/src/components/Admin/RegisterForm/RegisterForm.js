@@ -138,6 +138,7 @@ export default function RegisterForm() {
           value={inputs.repeatPassword}
         />
       </Form.Item>
+
       <Form.Item>
         <Checkbox
           name="privacyPolicy"
