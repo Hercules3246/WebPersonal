@@ -52,8 +52,6 @@ export default function RegisterForm() {
 
   const register = async e => {
     e.preventDefault();
-    const { email, password, repeatPassword, privacyPolicy } = formValid;
-
     const emailVal = inputs.password;
     const passwordVal = inputs.password;
     const privacyPolicyVal = inputs.password;
