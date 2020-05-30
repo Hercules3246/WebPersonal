@@ -3,12 +3,18 @@ import { Button, Icon, Layout } from "antd";
 import { Link } from "react-router-dom";
 import latraLogo from "../../../assets/img/png/Lastraico.bmp";
 import "./MenuTop.scss";
-import "../../../";
+
+import { logout } from "../../../api/auth";
 
 export default function MenuTop(props) {
   const { menuCollapsed, setMenuCollapsed } = props;
   const redirect = Link;
-  console.log(menuCollapsed);
+
+  const logoutUser = () => {
+    logout();
+    window.location.reload();
+  };
+
   return (
     <div className="menu-top">
       <div className="menu-top__left">
@@ -24,7 +30,7 @@ export default function MenuTop(props) {
         </Button>
       </div>
       <div className="menu-top__right">
-        <Button type="link" onClick={console.log("Desconexion")}>
+        <Button type="link" onClick={logoutUser}>
           <Icon type="poweroff"></Icon>
         </Button>
       </div>
